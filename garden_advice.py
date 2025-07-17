@@ -1,34 +1,51 @@
-# Hardcoded values for the season and plant type
-season = input("Enter the season (e.g., summer, winter): ").strip().lower()
-plant_type = input(
-    "Enter the plant type (e.g., flower, vegetable): "
-).strip().lower()
+"""
+garden_advice.py
+
+Interactive gardening advice script.
+Refactored into functions and uses dictionaries for easy extension.
+"""
+
+# Advice mappings for seasons and plant types
+SEASON_ADVICE = {
+    "summer": "Water your plants regularly and provide some shade.",
+    "winter": "Protect your plants from frost with covers."
+}
+
+PLANT_ADVICE = {
+    "flower": "Use fertiliser to encourage blooms.",
+    "vegetable": "Keep an eye out for pests!"
+}
 
 
-# Variable to hold gardening advice
-advice = ""
+def get_season_advice(season: str) -> str:
+    """
+    Return advice for the given season.
+    If the season isn't recognized, return a default message.
+    """
+    return SEASON_ADVICE.get(season, "No advice for this season.")
 
-# Determine advice based on the season
-if season == "summer":
-    advice += "Water your plants regularly and provide some shade.\n"
-elif season == "winter":
-    advice += "Protect your plants from frost with covers.\n"
-else:
-    advice += "No advice for this season.\n"
 
-# Determine advice based on the plant type
-if plant_type == "flower":
-    advice += "Use fertiliser to encourage blooms."
-elif plant_type == "vegetable":
-    advice += "Keep an eye out for pests!"
-else:
-    advice += "No advice for this type of plant."
+def get_plant_advice(plant_type: str) -> str:
+    """
+    Return advice for the given plant type.
+    If the plant type isn't recognized, return a default message.
+    """
+    return PLANT_ADVICE.get(plant_type, "No advice for this type of plant.")
 
-# Print the generated advice
-print(advice)
 
-# TODO: Examples of possible features to add:
-# - Add detailed comments explaining each block of code.
-# - Refactor the code into functions for better readability and modularity.
-# - Store advice in a dictionary for multiple plants and seasons.
-# - Recommend plants based on the entered season.
+def main():
+    """
+    Prompt the user for season and plant type,
+    then print out the corresponding pieces of advice.
+    """
+    season = input("Enter the season (e.g., summer, winter): ").strip().lower()
+    plant_type = input(
+        "Enter the plant type (e.g., flower, vegetable): ").strip().lower()
+
+    # Fetch and display advice
+    print(get_season_advice(season))
+    print(get_plant_advice(plant_type))
+
+
+if __name__ == "__main__":
+    main()
